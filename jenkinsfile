@@ -24,6 +24,9 @@ stages {
            steps {
 	     sh """
 	       docker run -d -p 8000:8000 todo-app
+	      """
+	   }
+	 }  
  stage('Run Docker container on remote hosts') {
              
             steps {
