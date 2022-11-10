@@ -31,12 +31,12 @@ stages {
              
             steps {
                 sh "docker -H ssh://jenkins@18.144.86.77 run -d -p 8000:8000 todo-app"
- 
-            }
-        }
-    }
- }
-}
-   }
+               }
+	     }
+	   }
+	 }
+       }
+     }
+     
  
     
