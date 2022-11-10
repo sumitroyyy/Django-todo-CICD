@@ -2,7 +2,7 @@ pipeline {
     agent any
    
     }
- stages {
+ stages {stages {
       stage('checkout') {
            steps {
              
@@ -10,27 +10,20 @@ pipeline {
              
           }
         }
-	
-  stage('Docker Build and Tag') {
+stages {
+      stage('build') {
            steps {
-              
-                sh 'docker build . -t todo-app' 
-                sh 'docker tag todo-app sumitroyyy/todo-app:latest'
-                //sh 'docker tag todo-app sumitroyyy/todo-app:$BUILD_NUMBER'
-               
+	   sh """
+	     docker build -t todo-app .
+	   """ 
+                        
           }
         }
-     
-  
-     
-      stage('Run Docker container on Jenkins Agent') {
-             
-            steps 
-			{
-                sh "docker run -d -p 8000:8000 todo-app"
- 
-            }
-        }
+        
+	stage('build') {
+           steps {
+	     sh """
+	       docker run -d -p 8000:8000 todo-app
  stage('Run Docker container on remote hosts') {
              
             steps {
