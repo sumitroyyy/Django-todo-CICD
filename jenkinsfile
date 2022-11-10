@@ -5,8 +5,7 @@ pipeline {
  stages {
       stage('checkout') {
            steps {
-             
-                git branch: 'develop', url: 'https://github.com/sumitroyyy/Django-todo-CICD'
+             checkout([$class: 'GitSCM', branches: [[name: '*/develop']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/sumitroyyy/Django-todo-CICD']]])
              
           }
         }
