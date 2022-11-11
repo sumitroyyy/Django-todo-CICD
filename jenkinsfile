@@ -1,41 +1,21 @@
-pipeline {
-    agent any
-   
-    }
- stages {
-      stage('checkout') {
-           steps {
-             checkout([$class: 'GitSCM', branches: [[name: '*/develop']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/sumitroyyy/Django-todo-CICD']]])
-             
-          }
-        }
-stages {
-      stage('build') {
-           steps {
-	   sh """
-	     docker build -t todo-app .
-	   """ 
-                        
-          }
-        }
-        
-	stage('deploy') {
-           steps {
-	     sh """
-	       docker run -d -p 8000:8000 todo-app
-	      """
-	   }
-	 }  
- stage('Run Docker container on remote hosts') {
-             
-            steps {
-                sh "docker -H ssh://jenkins@18.144.86.77 run -d -p 8000:8000 todo-app"
-               }
-	     }
-	   }
-	 }
-      
-     
-     
- 
-    
+node{
+    stage("Pull Source Code From GITHUB"){
+       git 'https://github.com/sumitroyyy/Django-todo-CICD.git'
+}
+
+
+    stage("Build Docker File"){
+        sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID'
+        sh 'docker image tag $JOB_NAME:v1.$BUILD_ID sumitroyy/$JOB_NAME:v1.$BUILD_ID'
+        sh 'docker image tag $JOB_NAME:v1.$BUILD_ID sumitroyy/$JOB_NAME:latest'
+}
+
+   stage("push Image To Docker HUB"){
+       sh 'docker login -u sumitroyy -p Royy9007!'
+       sh 'docker image push sumitroyy/$JOB_NAME:v1.$BUILD_ID'
+       sh 'docker image push sumitroyy/$JOB_NAME:latest'
+       sh 'docker image rmi $JOB_NAME:v1.$BUILD_ID sumitroyy/$JOB_NAME:v1.$BUILD_ID sumitroyy/$JOB_NAME:latest'
+}      
+
+
+}
