@@ -1,5 +1,5 @@
 FROM python:3
-RUN pip install django==2.0
+RUN pip install django==3.2
 WORKDIR /app
 COPY . .
 
