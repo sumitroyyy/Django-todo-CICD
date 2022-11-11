@@ -18,10 +18,10 @@ node{
 }      
   stage("deployment of docker container"){
         def dockerrun = 'docker run -p 8000:8000 -d sumitroyy/django-todo:latest'
-    sshagent(credentials :['webserverpasswd1']) {
+    sshagent(credentials :['webserverpasswd']) {
     // some block
 }
-       sh 'ssh -o StrictHostKeyChecking=no root@54.153.15.80 ${dockerrun}'
+       sh 'ssh -o StrictHostKeyChecking=no ec2-user@54.153.15.80 ${dockerrun}'
 
 }
   
