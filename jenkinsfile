@@ -16,6 +16,15 @@ node{
        sh 'docker image push sumitroyy/$JOB_NAME:latest'
        sh 'docker image rmi $JOB_NAME:v1.$BUILD_ID sumitroyy/$JOB_NAME:v1.$BUILD_ID sumitroyy/$JOB_NAME:latest'
 }      
+  stage("deployment of docker container"){
+        def dockerrun = 'docker run -p 8000:8000 -d --name django-todo sumitroyy/
+        django-todo:latest'
+        sshagent(['webserverpasswd']) {
+    // some block
+       sh "ssh -o StrictHostKeyChecking=no -l ec2-user@54.153.15.80 ${dockerrun}"
 
+}
+  
+  }
 
 }
