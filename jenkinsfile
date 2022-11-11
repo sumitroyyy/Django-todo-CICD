@@ -20,7 +20,7 @@ node{
         def dockerrun = 'docker run -p 8000:8000 -d sumitroyy/django-todo:latest'
         sshagent(['webserverpasswd']) {
     // some block
-       sh "ssh -o StrictHostKeyChecking=no -l ec2-user@54.153.15.80 ${dockerrun}"
+       sh "ssh -o StrictHostKeyChecking=no ec2-user@54.153.15.80 ${dockerrun}"
 
 }
   
