@@ -21,7 +21,7 @@ node{
         sshagent(['webserverpasswd1']) {
     // some block
 }
-       sh 'ssh -o StrictHostKeyChecking=no ec2-user@54.153.15.80 ${dockerrun}'
+       sh 'ssh -o StrictHostKeyChecking=no root@54.153.15.80 ${dockerrun}'
 
 }
   
