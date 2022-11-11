@@ -1,6 +1,6 @@
 node{
     stage("Pull Source Code From GITHUB"){
-       git 'https://github.com/sumitroyyy/Django-todo-CICD.git'
+       git branch: 'develop', url: 'https://github.com/sumitroyyy/Django-todo-CICD.git'
 }
 
 
